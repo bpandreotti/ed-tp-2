@@ -1,26 +1,51 @@
 #include "quicksort.h"
 
-Resultado Quicksort::classico(int* vetor, int n) {
+Resultado Quicksort::classico(int* vetor, int n, EscolhaPivo escolha_pivo) {
     auto res = Resultado();
     res.iniciar_timer();
-    contador_t contador = Quicksort::_classico(0, n - 1, vetor);
+    contador_t contador = Quicksort::_classico(vetor, 0, n - 1, escolha_pivo);
     res.parar_timer();
     res.set_contagem(contador);
     return res;
 }
 
-contador_t Quicksort::_classico(int esq, int dir, int* vetor) {
+// Função auxiliar para calcular a mediana de três números. Não é a mais eficiente ou elegante
+// das funções, mas funciona.
+int mediana_de_tres(int a, int b, int c) {
+    if (a >= b) {
+        if (c >= a) return a; // c >= a >= b
+        if (b >= c) return b; // a >= b >= c
+        return c; // a > c > b
+    } else {
+        // Se a < b, troca a e b e chama a função novamente
+        return mediana_de_tres(b, a, c);
+    }
+}
+
+contador_t Quicksort::_classico(int* vetor, int esq, int dir, EscolhaPivo escolha_pivo) {
     contador_t contador;
     int i, j;
-    
-    // No algoritmo clássico, o pivô é escolhido como o elemento central do vetor.
-    int pivo = vetor[(esq + dir) / 2];
+    int pivo = -1;
+    switch (escolha_pivo) {
+        case EscolhaPivo::central:
+            pivo = vetor[(esq + dir) / 2];
+            break;
+        case EscolhaPivo::primeiro:
+            pivo = vetor[esq];
+            break;
+        case EscolhaPivo::mediana_de_tres:
+            pivo = mediana_de_tres(vetor[esq], vetor[(esq + dir) / 2], vetor[dir]);
+            break;
+        default:
+            throw; // Escolha de pivô inválida
+            break;
+    }
 
-    contador += Quicksort::_particao(esq, dir, i, j, pivo, vetor);
+    contador += Quicksort::_particao(vetor, esq, dir, i, j, pivo);
     if (esq < j)
-        contador += Quicksort::_classico(esq, j, vetor);
+        contador += Quicksort::_classico(vetor, esq, j, escolha_pivo);
     if (dir > i)
-        contador += Quicksort::_classico(i, dir, vetor);
+        contador += Quicksort::_classico(vetor, i, dir, escolha_pivo);
     
     return contador;
 }
@@ -29,7 +54,7 @@ contador_t Quicksort::_classico(int esq, int dir, int* vetor) {
 // O método de partição independe da escolha de algoritmo, e pode ser utilizado por todas as
 // variações do quicksort. Para tornar esse método verdadeiramente geral, a escolha de pivô deve
 // ser feita fora dele, e passada pelo argumento `pivo`.
-contador_t Quicksort::_particao(int esq, int dir, int& i, int& j, int pivo, int* vetor) {
+contador_t Quicksort::_particao(int* vetor, int esq, int dir, int& i, int& j, int pivo) {
     contador_t contador;
     i = esq; j = dir;
 
