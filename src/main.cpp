@@ -12,13 +12,14 @@ void print_vetor(int* vetor, int n) {
 }
 
 int main(int argc, char* argv[]) {
-    
-    int* aleatorio = GeradorVetor::aleatorio(10, 100);
-    int* cresc = GeradorVetor::crescente(10);
-    int* decresc = GeradorVetor::decrescente(10);
-    print_vetor(aleatorio, 10);
-    print_vetor(cresc, 10);
-    print_vetor(decresc, 10);
+
+    int* vetor = GeradorVetor::aleatorio(10000000, 10000000);
+    auto resultado = Quicksort::classico(vetor, 10000000);
+
+    print_vetor(vetor, 50);
+    std::cout << resultado.get_num_comparacoes() << " comparações | "
+              << resultado.get_num_movimentacoes() << " movimentações | "
+              << resultado.get_tempo_microseg() << " µs " << std::endl;
     
     return 0;
 }

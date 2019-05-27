@@ -2,8 +2,9 @@
 
 Resultado Quicksort::classico(int* vetor, int n) {
     auto res = Resultado();
-    //TODO: iniciar e parar timer.
+    res.iniciar_timer();
     contador_t contador = Quicksort::_classico(0, n - 1, vetor);
+    res.parar_timer();
     res.set_contagem(contador);
     return res;
 }
