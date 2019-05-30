@@ -46,15 +46,13 @@ contador_t Quicksort::_insertion_sort(int* vetor, int esq, int dir) {
         int x = vetor[i];
         int j = i - 1;
         
-        while(j >= esq && vetor[j] > x) {
-            //TODO: Não tenho certeza que a contagem de comparações aqui está exata. Creio que se
-            // o while sair porque `vetor[j] <= x`, essa comparação não será contada. Tenho que
-            // pensar em uma forma elegante de corrigir isso.
+        while(j >= esq) {
             contador._num_comparacoes++;
-            
-            contador._num_movimentacoes++;
-            vetor[j + 1] = vetor[j];
-            j--;
+            if (vetor[j] > x) {
+                contador._num_movimentacoes++;
+                vetor[j + 1] = vetor[j];
+                j--;
+            } else break;
         }
         vetor[j+1] = x;
         contador._num_movimentacoes++;
