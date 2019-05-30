@@ -13,23 +13,15 @@ void print_vetor(int* vetor, int n) {
 }
 
 int main(int argc, char* argv[]) {
-    auto p = Pilha(4);
+    
+    int* vetor = GeradorVetor::aleatorio(100, 200);
+    print_vetor(vetor, 20);
+    auto resultado = Quicksort::nao_recursivo(vetor, 100);
+    print_vetor(vetor, 20);
 
-    p.push(1);
-    p.push(2);
-    p.push(3);
-    p.push(4);
-
-    std::cout << p.pop() << " "
-              << p.pop() << " "
-              << p.pop() << " "
-              << p.pop() << std::endl;
-
-    p.pop(); // Should throw
-
-    //  std::cout << resultado.get_num_comparacoes() << " comparações | "
-    //            << resultado.get_num_movimentacoes() << " movimentações | "
-    //            << resultado.get_tempo_microseg() << " µs " << std::endl;
+    std::cout << resultado.get_num_comparacoes() << " comparações | "
+              << resultado.get_num_movimentacoes() << " movimentações | "
+              << resultado.get_tempo_microseg() << " µs " << std::endl;
     
     return 0;
 }

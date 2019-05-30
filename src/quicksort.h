@@ -26,6 +26,8 @@ private:
     static contador_t _classico(int* vetor, int esq, int dir, EscolhaPivo escolha_pivo);
     
     static contador_t _com_insercao(int* vetor, int esq, int dir, int cutoff_insercao);
+
+    static contador_t _nao_recursivo(int* vetor, int n);
 public:
 
     // Variante clássica do quicksort. Aceita três alternativas de escolha de pivô: central,
@@ -35,6 +37,8 @@ public:
     // Variante do quicksort que utiliza ordenação por inserção a partir de certo ponto, definido
     // pelo argumento `porcentagem_insercao`.
     static Resultado com_insercao(int* vetor, int n, int porcentagem_insercao);
+
+    static Resultado nao_recursivo(int* vetor, int n);
 };
 
 #endif

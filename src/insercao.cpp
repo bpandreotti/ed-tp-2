@@ -54,7 +54,7 @@ contador_t Quicksort::_insertion_sort(int* vetor, int esq, int dir) {
                 j--;
             } else break;
         }
-        vetor[j+1] = x;
+        vetor[j + 1] = x;
         contador._num_movimentacoes++;
     }
     return contador;

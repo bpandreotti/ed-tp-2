@@ -14,6 +14,7 @@ public:
     ~Pilha();
     void push(int elemento);
     int pop();
+    int num_elementos();
 };
 
 #endif

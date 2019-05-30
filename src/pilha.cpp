@@ -25,3 +25,7 @@ int Pilha::pop() {
     this->topo--;
     return this->array[this->topo];
 }
+
+int Pilha::num_elementos() {
+    return this->topo;
+}
