@@ -28,8 +28,8 @@ contador_t Quicksort::_nao_recursivo(int* vetor, int n) {
 
         if (dir > esq) {
             int pivo = vetor[(esq + dir) / 2];
-            contador += Quicksort::_particao(vetor, esq, dir, i, j, pivo); //TODO: not working grrr
-
+            contador += Quicksort::_particao(vetor, esq, dir, i, j, pivo);
+            
             if (j - esq > dir - i) {
                 pilha.push(esq);
                 pilha.push(j);

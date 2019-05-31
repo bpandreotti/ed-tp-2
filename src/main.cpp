@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "quicksort.h"
 #include "resultado.h"
 #include "gerador_vetor.h"
@@ -12,31 +13,19 @@ void print_vetor(int* vetor, int n) {
     std::cout << vetor[n - 1] << "]" << std::endl;
 }
 
-int main(int argc, char* argv[]) {
-    
-    if (argc < 4) {
-        std::cerr << "Número de argumentos incorreto" << std::endl;
-        return 1;
-    }
+void realizar_teste(int n, std::string tipo_vetor, std::string tipo_algoritmo) {
 
-    int n = std::stoi(argv[3]); 
-    int *vetor = nullptr;
-    
-    std::string tipo_vetor(argv[2]);
-    
+    int *vetor = nullptr; 
     if (tipo_vetor == "Ale")
         vetor = GeradorVetor::aleatorio(n, 2 * n);
     else if (tipo_vetor == "OrdC")
         vetor = GeradorVetor::crescente(n);
     else if (tipo_vetor == "OrdD")
         vetor = GeradorVetor::decrescente(n);
-
-    print_vetor(vetor, 20);
+    else
+        throw std::invalid_argument("Tipo de vetor inválido!");
 
     Resultado resultado;
-    
-    std::string tipo_algoritmo(argv[1]);
-
     if (tipo_algoritmo == "QC")
         resultado = Quicksort::classico(vetor, n, EscolhaPivo::central);
     else if (tipo_algoritmo == "QM3")
@@ -51,12 +40,29 @@ int main(int argc, char* argv[]) {
         resultado = Quicksort::com_insercao(vetor, n, 10);
     else if (tipo_algoritmo == "QNR")
         resultado = Quicksort::nao_recursivo(vetor, n);
+    else
+        throw std::invalid_argument("Algoritmo inválido!");
 
-    print_vetor(vetor, 20);
+    std::cout << tipo_algoritmo  << " " << tipo_vetor << " " << n << " "
+              << resultado.get_num_comparacoes() << " "
+              << resultado.get_num_movimentacoes() << " "
+              << resultado.get_tempo_microseg() << std::endl;
+}
+
+int main(int argc, char* argv[]) {
     
-    std::cout << resultado.get_num_comparacoes() << " comparações | "
-              << resultado.get_num_movimentacoes() << " movimentações | "
-              << resultado.get_tempo_microseg() << " µs " << std::endl;
-    
+    if (argc < 4) {
+        std::cerr << "Número de argumentos incorreto" << std::endl;
+        return 1;
+    }
+
+    int n = std::stoi(argv[3]);
+    auto tipo_vetor = std::string(argv[2]);
+    auto tipo_algoritmo = std::string(argv[1]);
+    //TODO: implementar argumento opcional "-p"
+    //bool imprimir = (argc >= 5 && std::string(argv[4]) == "-p");
+
+    realizar_teste(n, tipo_vetor, tipo_algoritmo);
+
     return 0;
 }
