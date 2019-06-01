@@ -15,33 +15,38 @@ void print_vetor(int* vetor, int n) {
 
 void realizar_teste(int n, std::string tipo_vetor, std::string tipo_algoritmo) {
 
-    int *vetor = nullptr; 
-    if (tipo_vetor == "Ale")
-        vetor = GeradorVetor::aleatorio(n, 2 * n);
-    else if (tipo_vetor == "OrdC")
-        vetor = GeradorVetor::crescente(n);
-    else if (tipo_vetor == "OrdD")
-        vetor = GeradorVetor::decrescente(n);
-    else
-        throw std::invalid_argument("Tipo de vetor inválido!");
-
     Resultado resultado;
-    if (tipo_algoritmo == "QC")
-        resultado = Quicksort::classico(vetor, n, EscolhaPivo::central);
-    else if (tipo_algoritmo == "QM3")
-        resultado = Quicksort::classico(vetor, n, EscolhaPivo::mediana_de_tres);
-    else if (tipo_algoritmo == "QPE")
-        resultado = Quicksort::classico(vetor, n, EscolhaPivo::primeiro);
-    else if (tipo_algoritmo == "QI1")
-        resultado = Quicksort::com_insercao(vetor, n, 1);
-    else if (tipo_algoritmo == "QI5")
-        resultado = Quicksort::com_insercao(vetor, n, 5);
-    else if (tipo_algoritmo == "QI10")
-        resultado = Quicksort::com_insercao(vetor, n, 10);
-    else if (tipo_algoritmo == "QNR")
-        resultado = Quicksort::nao_recursivo(vetor, n);
-    else
-        throw std::invalid_argument("Algoritmo inválido!");
+
+    for (int i = 0; i < 20; i++) {
+        int *vetor = nullptr;
+        if (tipo_vetor == "Ale")
+            vetor = GeradorVetor::aleatorio(n, 2 * n);
+        else if (tipo_vetor == "OrdC")
+            vetor = GeradorVetor::crescente(n);
+        else if (tipo_vetor == "OrdD")
+            vetor = GeradorVetor::decrescente(n);
+        else
+            throw std::invalid_argument("Tipo de vetor inválido!");
+
+        if (tipo_algoritmo == "QC")
+            resultado += Quicksort::classico(vetor, n, EscolhaPivo::central);
+        else if (tipo_algoritmo == "QM3")
+            resultado += Quicksort::classico(vetor, n, EscolhaPivo::mediana_de_tres);
+        else if (tipo_algoritmo == "QPE")
+            resultado += Quicksort::classico(vetor, n, EscolhaPivo::primeiro);
+        else if (tipo_algoritmo == "QI1")
+            resultado += Quicksort::com_insercao(vetor, n, 1);
+        else if (tipo_algoritmo == "QI5")
+            resultado += Quicksort::com_insercao(vetor, n, 5);
+        else if (tipo_algoritmo == "QI10")
+            resultado += Quicksort::com_insercao(vetor, n, 10);
+        else if (tipo_algoritmo == "QNR")
+            resultado += Quicksort::nao_recursivo(vetor, n);
+        else
+            throw std::invalid_argument("Algoritmo inválido!");
+    }
+    
+    resultado /= 20;
 
     std::cout << tipo_algoritmo  << " " << tipo_vetor << " " << n << " "
               << resultado.get_num_comparacoes() << " "
