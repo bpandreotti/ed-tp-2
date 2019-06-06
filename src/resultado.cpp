@@ -41,17 +41,3 @@ long int Resultado::get_num_movimentacoes() {
 long int Resultado::get_tempo_microseg() {
     return this->_duracao_timer.count() * 1000000.0;
 }
-
-Resultado& Resultado::operator+=(const Resultado& outro) {
-    this->_num_comparacoes += outro._num_comparacoes;
-    this->_num_movimentacoes += outro._num_movimentacoes;
-    this->_duracao_timer += outro._duracao_timer;
-    return *this;
-}
-
-Resultado& Resultado::operator/=(const int& num) {
-    this->_num_comparacoes /= num;
-    this->_num_movimentacoes /= num;
-    this->_duracao_timer /= num;
-    return *this;
-}

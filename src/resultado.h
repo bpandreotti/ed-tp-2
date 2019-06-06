@@ -26,9 +26,6 @@ public:
     long int get_num_comparacoes();
     long int get_num_movimentacoes();
     long int get_tempo_microseg();
-
-    Resultado& operator+=(const Resultado& outro);
-    Resultado& operator/=(const int& num);
 };
 
 

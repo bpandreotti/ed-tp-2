@@ -34,6 +34,8 @@ contador_t Quicksort::_classico(int* vetor, int esq, int dir, EscolhaPivo escolh
             break;
         case EscolhaPivo::mediana_de_tres:
             pivo = Quicksort::_mediana_de_tres(vetor[esq], vetor[(esq + dir) / 2], vetor[dir]);
+            // Computar a mediana de três necessita de 3 comparações
+            contador._num_comparacoes += 3;
             break;
         default:
             throw; // Escolha de pivô inválida
@@ -73,7 +75,7 @@ contador_t Quicksort::_particao(int* vetor, int esq, int dir, int& i, int& j, in
             int tmp = vetor[i];
             vetor[i] = vetor[j];
             vetor[j] = tmp;
-            contador._num_movimentacoes += 2;
+            contador._num_movimentacoes += 3;
 
             i++; j--; // Após a troca, `i` e `j` devem progredir em uma posição.
         }

@@ -29,6 +29,7 @@ contador_t Quicksort::_com_insercao(int* vetor, int esq, int dir, int cutoff_ins
 
     // Usamos a escolha de pivô 'mediana de três'.
     int pivo = Quicksort::_mediana_de_tres(vetor[esq], vetor[(esq + dir) / 2], vetor[dir]);
+    contador._num_comparacoes += 3; // Computar a mediana de três necessita de 3 comparações
 
     contador += Quicksort::_particao(vetor, esq, dir, i, j, pivo);
     if (esq < j)
@@ -44,6 +45,7 @@ contador_t Quicksort::_insertion_sort(int* vetor, int esq, int dir) {
 
     for (int i = esq + 1; i <= dir; i++) {
         int x = vetor[i];
+        contador._num_movimentacoes++;
         int j = i - 1;
         
         while(j >= esq) {

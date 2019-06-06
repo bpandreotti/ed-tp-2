@@ -23,8 +23,11 @@ int* clonar(int* vetor, int n) {
 
 void realizar_teste(int n, std::string tipo_vetor, std::string tipo_algoritmo,  bool imprimir) {
 
-    Resultado resultado;
     int* vetores[20];
+    int tempos[20]; // Como desejamos calcular a mediana dos tempos, é necessário armazená-los
+
+    long int total_comparacoes = 0;
+    long int total_movimentacoes = 0;
 
     for (int i = 0; i < 20; i++) {
         int *vetor = nullptr;
@@ -41,32 +44,39 @@ void realizar_teste(int n, std::string tipo_vetor, std::string tipo_algoritmo,  
         if (imprimir) 
             vetores[i] = clonar(vetor, n);
 
+        Resultado res;
         if (tipo_algoritmo == "QC")
-            resultado += Quicksort::classico(vetor, n, EscolhaPivo::central);
+            res = Quicksort::classico(vetor, n, EscolhaPivo::central);
         else if (tipo_algoritmo == "QM3")
-            resultado += Quicksort::classico(vetor, n, EscolhaPivo::mediana_de_tres);
+            res = Quicksort::classico(vetor, n, EscolhaPivo::mediana_de_tres);
         else if (tipo_algoritmo == "QPE")
-            resultado += Quicksort::classico(vetor, n, EscolhaPivo::primeiro);
+            res = Quicksort::classico(vetor, n, EscolhaPivo::primeiro);
         else if (tipo_algoritmo == "QI1")
-            resultado += Quicksort::com_insercao(vetor, n, 1);
+            res = Quicksort::com_insercao(vetor, n, 1);
         else if (tipo_algoritmo == "QI5")
-            resultado += Quicksort::com_insercao(vetor, n, 5);
+            res = Quicksort::com_insercao(vetor, n, 5);
         else if (tipo_algoritmo == "QI10")
-            resultado += Quicksort::com_insercao(vetor, n, 10);
+            res = Quicksort::com_insercao(vetor, n, 10);
         else if (tipo_algoritmo == "QNR")
-            resultado += Quicksort::nao_recursivo(vetor, n);
+            res = Quicksort::nao_recursivo(vetor, n);
         else
             throw std::invalid_argument("Algoritmo inválido!");
 
+        total_comparacoes += res.get_num_comparacoes();
+        total_movimentacoes += res.get_num_movimentacoes();
+        tempos[i] = (int)res.get_tempo_microseg();
         delete[] vetor;
     }
     
-    resultado /= 20;
-
+    // Para computar a mediana dos tempos, temos que ordenar o vetor. Felizmente, temos uma
+    // variedade de algoritmos de ordenação implementados. No caso, escolhi o quicksort clássico.
+    Quicksort::classico(tempos, 20, EscolhaPivo::central);
+    int mediana_tempo = tempos[10];
+    
     std::cout << tipo_algoritmo  << " " << tipo_vetor << " " << n << " "
-              << resultado.get_num_comparacoes() << " "
-              << resultado.get_num_movimentacoes() << " "
-              << resultado.get_tempo_microseg() << std::endl;
+              << (total_comparacoes / 20) << " "
+              << (total_movimentacoes / 20) << " "
+              << mediana_tempo << std::endl;
 
     if (imprimir) {
         for (int i = 0; i < 20; i++) {
