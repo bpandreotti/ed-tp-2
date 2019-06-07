@@ -13,7 +13,7 @@ private:
     Quicksort() {} // Construtor private garante que a classe não pode ser instanciada.
 
     // Método auxiliar para encontrar a mediana de três inteiros.
-    static int _mediana_de_tres(int a, int b, int c);
+    static int _mediana_de_tres(int a, int b, int c, contador_t& contador);
 
     // Método de partição. A escolha de pivô deve ser realizada fora desse método e passada pelo
     // argumento `pivo`. Isso torna esse método geral, e ele pode ser utilizado por qualquer

@@ -9,15 +9,19 @@ Resultado Quicksort::classico(int* vetor, int n, EscolhaPivo escolha_pivo) {
     return res;
 }
 
-int Quicksort::_mediana_de_tres(int a, int b, int c) {
+int Quicksort::_mediana_de_tres(int a, int b, int c, contador_t& contador) {
     // Não é a mais eficiente ou elegante das implementações, mas funciona.
+    contador._num_comparacoes += 2; // `if` externo e primeiro `if` interno.
     if (a >= b) {
         if (c >= a) return a; // c >= a >= b
+        contador._num_comparacoes++; // Se não retornou até aqui, mais uma comparação será feita.
         if (b >= c) return b; // a >= b >= c
         return c; // a > c > b
     } else {
-        // Se a < b, troca a e b e chama a função novamente
-        return Quicksort::_mediana_de_tres(b, a, c);
+        if (c >= b) return b; // c >= b > a
+        contador._num_comparacoes++;
+        if (a >= c) return a; // b > a >= c
+        return c; // a > c > b
     }
 }
 
@@ -33,9 +37,12 @@ contador_t Quicksort::_classico(int* vetor, int esq, int dir, EscolhaPivo escolh
             pivo = vetor[esq];
             break;
         case EscolhaPivo::mediana_de_tres:
-            pivo = Quicksort::_mediana_de_tres(vetor[esq], vetor[(esq + dir) / 2], vetor[dir]);
-            // Computar a mediana de três necessita de 3 comparações
-            contador._num_comparacoes += 3;
+            pivo = Quicksort::_mediana_de_tres(
+                vetor[esq],
+                vetor[(esq + dir) / 2],
+                vetor[dir],
+                contador
+            );
             break;
         default:
             throw; // Escolha de pivô inválida

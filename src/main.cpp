@@ -23,8 +23,12 @@ int* clonar(int* vetor, int n) {
 
 void realizar_teste(int n, std::string tipo_vetor, std::string tipo_algoritmo,  bool imprimir) {
 
+    // Como desejamos calcular a mediana dos tempos, é necessário armazená-los. Ao armazenar o
+    // tempo em um `int` estamos presumindo que o tempo máximo de cada teste individual será menor
+    // que 2147483647 µs (2^31 - 1), ou 35 min 47 s. Experimentalmente, essa premissa não foi
+    // problemática.
+    int tempos[20];
     int* vetores[20];
-    int tempos[20]; // Como desejamos calcular a mediana dos tempos, é necessário armazená-los
 
     long int total_comparacoes = 0;
     long int total_movimentacoes = 0;
@@ -96,7 +100,6 @@ int main(int argc, char* argv[]) {
     int n = std::stoi(argv[3]);
     auto tipo_vetor = std::string(argv[2]);
     auto tipo_algoritmo = std::string(argv[1]);
-    //TODO: implementar argumento opcional "-p"
     bool imprimir = (argc >= 5 && std::string(argv[4]) == "-p");
 
     realizar_teste(n, tipo_vetor, tipo_algoritmo, imprimir);
