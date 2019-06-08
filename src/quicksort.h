@@ -12,7 +12,8 @@ class Quicksort {
 private:
     Quicksort() {} // Construtor private garante que a classe não pode ser instanciada.
 
-    // Método auxiliar para encontrar a mediana de três inteiros.
+    // Método auxiliar para encontrar a mediana de três inteiros. Recebe um contador por referência
+    // para incrementar o número de comparações.
     static int _mediana_de_tres(int a, int b, int c, contador_t& contador);
 
     // Método de partição. A escolha de pivô deve ser realizada fora desse método e passada pelo
@@ -28,8 +29,8 @@ private:
     static contador_t _com_insercao(int* vetor, int esq, int dir, int cutoff_insercao);
 
     static contador_t _nao_recursivo(int* vetor, int n);
-public:
 
+public:
     // Variante clássica do quicksort. Aceita três alternativas de escolha de pivô: central,
     // primeiro elemento, ou mediana de três. Vide o enum `EscolhaPivo`.
     static Resultado classico(int* vetor, int n, EscolhaPivo escolha_pivo);
@@ -38,6 +39,8 @@ public:
     // pelo argumento `porcentagem_insercao`.
     static Resultado com_insercao(int* vetor, int n, int porcentagem_insercao);
 
+    // Variante do quicksort não recursiva. Faz uso da estrutura de dados pilha para simular a
+    // pilha de chamadas. Vide `pilha.h`.
     static Resultado nao_recursivo(int* vetor, int n);
 };
 

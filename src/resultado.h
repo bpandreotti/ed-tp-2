@@ -3,6 +3,7 @@
 
 #include <chrono>
 
+// Struct para contar o número de comparações e de movimentações de um teste.
 struct contador_t {
     long int _num_comparacoes;
     long int _num_movimentacoes;
@@ -11,6 +12,10 @@ struct contador_t {
     contador_t& operator+=(const contador_t& outro);
 };
 
+// Uma classe para armazenar os resultados de um teste. Contabiliza o número de comparações, o 
+// número de movimentações, e o tempo decorrido. O timer deve ser iniciado com o método
+// `Resultado::iniciar_timer`, e interrompido com `Resultado::parar_timer`. As contagens devem ser
+// feitas usando o struct `contador_t`, e carregadas com o método `Resultado::set_contagem`.
 class Resultado {
 private:
     long int _num_comparacoes;

@@ -28,6 +28,9 @@ void realizar_teste(int n, std::string tipo_vetor, std::string tipo_algoritmo,  
     // que 2147483647 µs (2^31 - 1), ou 35 min 47 s. Experimentalmente, essa premissa não foi
     // problemática.
     int tempos[20];
+
+    // Como os vetores são impressos depois da ordenação, é necessário armazenar os vetores
+    // originais.
     int* vetores[20];
 
     long int total_comparacoes = 0;

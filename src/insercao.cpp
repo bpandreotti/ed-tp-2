@@ -49,7 +49,6 @@ contador_t Quicksort::_insertion_sort(int* vetor, int esq, int dir) {
 
     for (int i = esq + 1; i <= dir; i++) {
         int x = vetor[i];
-        contador._num_movimentacoes++;
         int j = i - 1;
         
         while(j >= esq) {

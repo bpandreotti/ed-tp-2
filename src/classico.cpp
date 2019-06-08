@@ -82,9 +82,10 @@ contador_t Quicksort::_particao(int* vetor, int esq, int dir, int& i, int& j, in
             int tmp = vetor[i];
             vetor[i] = vetor[j];
             vetor[j] = tmp;
-            contador._num_movimentacoes += 3;
+            // Considerando troca como duas movimentações. Vide documentação.
+            contador._num_movimentacoes += 2;
 
-            i++; j--; // Após a troca, `i` e `j` devem progredir em uma posição.
+            i++; j--;
         }
     } while (i <= j);
 

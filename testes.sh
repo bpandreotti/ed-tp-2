@@ -15,9 +15,9 @@ do
 	for tipo_vetor in Ale OrdC OrdD
 	do
 		{
-			for n in {50000..100000..50000}
+			for n in {50000..500000..50000}
 			do
-				$1 $tipo_alg $tipo_vetor $n >> out.txt
+				bin/main $tipo_alg $tipo_vetor $n >> out.txt
 			done
 
 			echo "`date +\[%H:%M:%S\]` terminado: $tipo_alg $tipo_vetor" >> testes-sh-log.txt
