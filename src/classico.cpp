@@ -1,4 +1,5 @@
 #include "quicksort.h"
+#include <stdexcept>
 
 Resultado Quicksort::classico(int* vetor, int n, EscolhaPivo escolha_pivo) {
     auto res = Resultado();
@@ -45,7 +46,7 @@ contador_t Quicksort::_classico(int* vetor, int esq, int dir, EscolhaPivo escolh
             );
             break;
         default:
-            throw; // Escolha de pivô inválida
+            throw std::invalid_argument("Escolha de pivô inválida");
             break;
     }
 

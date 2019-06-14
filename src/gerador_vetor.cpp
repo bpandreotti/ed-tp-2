@@ -13,10 +13,11 @@ int* GeradorVetor::aleatorio(int n, int valor_max) {
         GeradorVetor::_rng_seedado = true;
     }
     
-    // Utilizar `std::rand() % valor_max` pode gerar viés na geração de números aleatórios. Além de
+    // Utilizar `std::rand() % valor_max` pode gerar viés na geração de números aleatórios, além de
     // ser um pouco mais lento. Por isso, para gerar um número aleatório no intervalo desejado,
-    // estou usando `std::rand() / ((RAND_MAX + 1u) / valor_max)`.
-    //TODO: explicar isso melhor na documentação.
+    // estou usando `std::rand() / ((RAND_MAX + 1u) / valor_max)`. Para mais detalhes, vide:
+    // https://stackoverflow.com/a/10984975
+    // https://en.cppreference.com/w/cpp/numeric/random/rand
     unsigned int d = (RAND_MAX + 1u) / valor_max;
     for (int i = 0; i < n; i++)
         vetor[i] = std::rand() / d;

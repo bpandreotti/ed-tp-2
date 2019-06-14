@@ -30,6 +30,7 @@ contador_t Quicksort::_nao_recursivo(int* vetor, int n) {
             int pivo = vetor[(esq + dir) / 2];
             contador += Quicksort::_particao(vetor, esq, dir, i, j, pivo);
             
+            // É preferível ordenar a menor partição primeiro.
             if (j - esq > dir - i) {
                 pilha.push(esq);
                 pilha.push(j);

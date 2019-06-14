@@ -5,6 +5,7 @@
 #include "gerador_vetor.h"
 #include "pilha.h"
 
+// Função auxiliar para imprimir um vetor.
 void print_vetor(int* vetor, int n) {
     for (int i = 0; i < n - 1; i++) {
         std::cout << vetor[i] << " ";
@@ -12,6 +13,7 @@ void print_vetor(int* vetor, int n) {
     std::cout << vetor[n - 1] << std::endl;
 }
 
+// Função auxiliar para clonar um vetor.
 int* clonar(int* vetor, int n) {
     int* novo = new int[n];
 

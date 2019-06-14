@@ -39,5 +39,6 @@ long int Resultado::get_num_movimentacoes() {
 }
 
 long int Resultado::get_tempo_microseg() {
+    // Implicitamente converte o tempo `double` para um `long int`.
     return this->_duracao_timer.count() * 1000000.0;
 }

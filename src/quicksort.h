@@ -3,6 +3,7 @@
 
 #include "resultado.h"
 
+// Enum que representa as possíveis formas de escolher um pivô para o algoritmo.
 enum class EscolhaPivo { central, primeiro, mediana_de_tres };
 
 // Classe Quicksort. Esta é uma classe "estática", ou seja, não pode ser instanciada, e apenas

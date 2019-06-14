@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -g -Wall -std=c++11
+CFLAGS := -O3 -g -Wall -std=c++11
 
 TARGET := bin/main
 SRCDIR := src

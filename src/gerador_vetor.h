@@ -10,8 +10,13 @@ private:
     GeradorVetor() {} // Construtor private garante que a classe não pode ser instanciada.
 
 public:
+    // Gera um vetor de `n` elementos selecionados aleatoriamente no intervalo 0..`valor_max`.
     static int* aleatorio(int n, int valor_max);
+
+    // Gera um vetor de `n` elementos ordenados de forma crescente.
     static int* crescente(int n);
+
+    // Gera um vetor de `n` elementos ordenados de forma decrescente.
     static int* decrescente(int n);    
 };
 
